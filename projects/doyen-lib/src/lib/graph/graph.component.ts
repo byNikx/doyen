@@ -6,33 +6,53 @@ import {
   Input,
   OnChanges,
   SimpleChanges,
-  KeyValueDiffer,
-  KeyValueDiffers,
-  DoCheck
+  DoCheck,
+  ContentChild,
+  AfterContentInit,
+  Directive,
+  ViewContainerRef,
+  ComponentFactoryResolver,
+  ComponentFactory,
+  Type,
+  Renderer2
 } from '@angular/core';
 
 import { GraphContainerDirective } from './graph-container.directive';
 import * as Highcharts from 'highcharts';
 import { Options, ChartObject } from 'highcharts';
+import { GraphTitleComponent } from './graph-title/graph-title.component';
 
 @Component({
   selector: 'bd-graph, [bd-graph]',
   templateUrl: './graph.component.html',
-  styleUrls: ['./graph.component.css']
+  styleUrls: ['./graph.component.scss']
 })
-export class GraphComponent implements OnInit, DoCheck, OnChanges {
+export class GraphComponent implements OnInit, AfterContentInit {
 
   /**
-   * Setting up deep watch on options property.
-   * @type KeyValueDiffer<any, any>.
+   * Graph title reference.
+   * @type GraphTitleComponent
    */
-  private _optionsDiffer: KeyValueDiffer<any, any>;
-  set optionsDiffer(differ: KeyValueDiffer<any, any>) {
-    this._optionsDiffer = differ;
+  private _graphTitle: GraphTitleComponent;
+  @ContentChild(GraphTitleComponent) set graphTitle(title: GraphTitleComponent) {
+    this._graphTitle = title;
   }
 
-  get optionsDiffer(): KeyValueDiffer<any, any> {
-    return this._optionsDiffer;
+  get graphTitle(): GraphTitleComponent {
+    return this._graphTitle;
+  }
+
+  /**
+   * Graph title container reference.
+   * @type GraphTitleContainerDirective
+   */
+  private _graphTitleContainer: GraphTitleContainerDirective;
+  @ViewChild(GraphTitleContainerDirective) set graphTitleContainer(container: GraphTitleContainerDirective) {
+    this._graphTitleContainer = container;
+  }
+
+  get graphTitleContainer(): GraphTitleContainerDirective {
+    return this._graphTitleContainer;
   }
 
   /**
@@ -54,7 +74,23 @@ export class GraphComponent implements OnInit, DoCheck, OnChanges {
    */
   private _options: Options;
   @Input() set options(options: Options) {
-    //    console.log(options);
+
+    /**
+     * Update the graph title if it's updated in the provided options,
+     * and bd-graph-title component is present in the graph.
+     */
+    if (!this.graphTitle && this.graphTitleContainer && options.title) {
+      this.loadGraphTitle(options.title.text);
+    }
+
+    /**
+     * Remove the title from the supplied options,
+     * and update the chart if it's already rendered.
+     */
+    if (this.chart) {
+      options.title = null;
+      this.chart.update(options);
+    }
     this._options = options;
   }
 
@@ -71,8 +107,8 @@ export class GraphComponent implements OnInit, DoCheck, OnChanges {
    * @type GraphContainerDirective
    */
   private _graphContainer: GraphContainerDirective;
-  @ViewChild(GraphContainerDirective) set graphContainer(graphContainer: GraphContainerDirective) {
-    this._graphContainer = graphContainer;
+  @ViewChild(GraphContainerDirective) set graphContainer(container: GraphContainerDirective) {
+    this._graphContainer = container;
   }
 
   /**
@@ -85,24 +121,58 @@ export class GraphComponent implements OnInit, DoCheck, OnChanges {
 
   constructor(
     private element: ElementRef,
-    private differs: KeyValueDiffers
+    private renderer: Renderer2,
+    private componentFactoryResolver: ComponentFactoryResolver
   ) { }
 
   ngOnInit(): void {
-    this.optionsDiffer = this.differs.find(this.options).create();
-    this.chart = Highcharts.chart(this.graphContainer.viewContainerRef.element.nativeElement, this.options);
+    const optionsWithoutTitle = Object.assign({}, this.options, { title: null });
+    this.chart = Highcharts.chart(this.graphContainer.viewContainerRef.element.nativeElement, optionsWithoutTitle);
   }
 
-  ngDoCheck(): void {
-    const newChange = this.optionsDiffer.diff(this.options);
-    //    this.chart.update(this.options);
-    if (newChange) {
-      console.log(newChange);
-      //      this.options = Object.assign({}, this.options);
+  ngAfterContentInit(): void {
+
+    /**
+     * Load the bd-graph-title component if it's not available.
+     */
+    if (!this.graphTitle) {
+      this.loadGraphTitle(this.options.title.text);
     }
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes.options);
+  /**
+   * Helper method which returns generated factory for the component if available.
+   * @param component
+   * @returns ComponentFactory<T>
+   */
+  getComponentFactory<T>(component: Type<T>): ComponentFactory<T> {
+    return this.componentFactoryResolver.resolveComponentFactory(component);
   }
+
+  /**
+   * Load the bd-graph-title component and sets title text.
+   * @param title
+   */
+  loadGraphTitle(title: any): void {
+    const viewContainerRef = this.graphTitleContainer.viewContainerRef;
+    const graphTitleComponentFactory = this.getComponentFactory(GraphTitleComponent);
+    viewContainerRef.clear();
+    viewContainerRef.createComponent(graphTitleComponentFactory, 0, null, [
+      [this.renderer.createText(title)]
+    ]);
+  }
+
+  loadGraphFooter(): void {
+    throw new Error('Method implementation not available.');
+  }
+
+}
+
+@Directive({
+  selector: '[bdGraphTitleContainer]'
+})
+export class GraphTitleContainerDirective {
+  constructor(
+    public viewContainerRef: ViewContainerRef
+  ) { }
 }

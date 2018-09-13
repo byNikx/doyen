@@ -1,18 +1,30 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GraphComponent } from './graph.component';
+import { GraphComponent, GraphTitleContainerDirective } from './graph.component';
 import { GraphContainerDirective } from './graph-container.directive';
+import { GraphTitleComponent } from './graph-title/graph-title.component';
+import { GraphFooterComponent } from './graph-footer/graph-footer.component';
+import { DividerModule } from '../divider/divider.module';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    DividerModule
   ],
   declarations: [
     GraphComponent,
-    GraphContainerDirective
+    GraphContainerDirective,
+    GraphTitleComponent,
+    GraphFooterComponent,
+    GraphTitleContainerDirective
   ],
   exports: [
     GraphComponent,
+    GraphTitleComponent,
+    GraphFooterComponent
+  ],
+  entryComponents: [
+    GraphTitleComponent
   ]
 })
 export class GraphModule { }

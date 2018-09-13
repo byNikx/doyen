@@ -1,0 +1,7 @@
+@import '../../../../_theme';
+
+:host{
+    display: block;
+    padding: 1rem; 
+    border-top: 1px solid $border-color;
+}

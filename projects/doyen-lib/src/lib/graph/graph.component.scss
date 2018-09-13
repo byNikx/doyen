@@ -1,0 +1,7 @@
+@import '../../../_theme';
+:host{
+    font-family: $font-family;
+    .with-border{
+        border: 1px solid $border-color;
+    }
+}

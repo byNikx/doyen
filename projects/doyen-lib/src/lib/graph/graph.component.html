@@ -1,10 +1,11 @@
-<article>
-  <section class="graph-title">
-    <ng-content select="graph-title, [graph-title]"></ng-content>
-  </section>
-  {{options | json}}
+<article class="with-border">
+  <header class="graph-title test">
+    <ng-container bdGraphTitleContainer>
+      <ng-content select="bd-graph-title, [bd-graph-title]"></ng-content>
+    </ng-container>
+  </header>
   <section bdGraphContainer class="graph-container"></section>
-  <section class="graph-footer">
-    <ng-content select="graph-footer"></ng-content>
-  </section>
-</article>
+  <footer class="graph-footer">
+    <ng-content select="bd-graph-footer, [bd-graph-footer]"></ng-content>
+  </footer>
+</article> 
