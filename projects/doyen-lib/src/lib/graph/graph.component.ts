@@ -14,7 +14,8 @@ import {
   ComponentFactoryResolver,
   ComponentFactory,
   Type,
-  Renderer2
+  Renderer2,
+  forwardRef
 } from '@angular/core';
 
 import { GraphContainerDirective } from './graph-container.directive';
@@ -47,7 +48,7 @@ export class GraphComponent implements OnInit, AfterContentInit {
    * @type GraphTitleContainerDirective
    */
   private _graphTitleContainer: GraphTitleContainerDirective;
-  @ViewChild(GraphTitleContainerDirective) set graphTitleContainer(container: GraphTitleContainerDirective) {
+  @ViewChild(forwardRef(() => GraphTitleContainerDirective)) set graphTitleContainer(container: GraphTitleContainerDirective) {
     this._graphTitleContainer = container;
   }
 
