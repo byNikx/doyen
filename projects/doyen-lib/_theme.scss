@@ -1,6 +1,11 @@
 @import './_util';
-
-.bd-title{
+@import '~projects/doyen-lib/node_modules/foundation-sites/dist/css/foundation.min.css';
+a, button{
+    &.button{
+        margin-bottom: 0;
+    }
+}
+.bd-title{  
 
 }
 .bd-body-1{
@@ -21,12 +26,12 @@
     }
     h2{
 
-    }
+    } 
     h3{
 
     }
     h4{
-
+ 
     }
     h6{
 

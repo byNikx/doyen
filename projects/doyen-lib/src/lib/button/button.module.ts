@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DividerComponent } from './divider.component';
+import { ButtonDirective } from './button.directive';
 
 @NgModule({
   imports: [
     CommonModule
   ],
   declarations: [
-    DividerComponent
+    ButtonDirective
   ],
   exports: [
-    DividerComponent
+    ButtonDirective
   ]
 })
-export class DividerModule { }
+export class ButtonModule { }

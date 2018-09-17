@@ -23,7 +23,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "projects/doyen-lib/_theme.scss"
             ],
             "scripts": []
           },
@@ -132,7 +133,8 @@
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
             "tsConfig": "projects/doyen-lib/tsconfig.lib.json",
-            "project": "projects/doyen-lib/ng-package.json"
+            "project": "projects/doyen-lib/ng-package.json",
+            "styles": []
           },
           "configurations": {
             "production": {
