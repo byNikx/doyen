@@ -40,7 +40,7 @@ export class AppComponent {
     // );
     this.options = {
       chart: {
-        type: 'line'
+        type: 'column'
       },
       title: {
         text: 'New Title'

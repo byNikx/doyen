@@ -32,7 +32,6 @@ export class GraphComponent implements OnInit, AfterContentInit {
 
   /**
    * Graph title reference.
-   * @type GraphTitleComponent
    */
   private _graphTitle: GraphTitleComponent;
   @ContentChild(GraphTitleComponent) set graphTitle(title: GraphTitleComponent) {
@@ -45,7 +44,6 @@ export class GraphComponent implements OnInit, AfterContentInit {
 
   /**
    * Graph title container reference.
-   * @type GraphTitleContainerDirective
    */
   private _graphTitleContainer: GraphTitleContainerDirective;
   @ViewChild(forwardRef(() => GraphTitleContainerDirective)) set graphTitleContainer(container: GraphTitleContainerDirective) {
@@ -58,7 +56,6 @@ export class GraphComponent implements OnInit, AfterContentInit {
 
   /**
    * Property which provides access to initialized chart.
-   * @type ChartObject
    */
   private _chart: ChartObject;
   set chart(chart: ChartObject) {
@@ -71,7 +68,6 @@ export class GraphComponent implements OnInit, AfterContentInit {
 
   /**
    * Options attribute for drawning the chart.
-   * @type Options
    */
   private _options: Options;
   @Input() set options(options: Options) {
@@ -105,7 +101,6 @@ export class GraphComponent implements OnInit, AfterContentInit {
 
   /**
    * Graph container reference.
-   * @type GraphContainerDirective
    */
   private _graphContainer: GraphContainerDirective;
   @ViewChild(GraphContainerDirective) set graphContainer(container: GraphContainerDirective) {

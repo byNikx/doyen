@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { DoyenLibModule } from 'projects/doyen-lib/src/public_api';
+import { GraphModule, DividerModule } from '@nikx/uma';
 
 @NgModule({
   declarations: [
@@ -10,7 +10,8 @@ import { DoyenLibModule } from 'projects/doyen-lib/src/public_api';
   ],
   imports: [
     BrowserModule,
-    DoyenLibModule
+    GraphModule,
+    DividerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
