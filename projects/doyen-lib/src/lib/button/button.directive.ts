@@ -46,7 +46,7 @@ export class ButtonDirective {
   }
 
   constructor(
-    private element: ElementRef
+    protected element: ElementRef
   ) { }
 
   @HostBinding('class') get elementClass() {
@@ -63,4 +63,14 @@ export class ButtonDirective {
   }
 
 
+}
+
+@Directive({
+  selector: '[bdHollowButton], [bd-hollow-button]'
+})
+export class HollowButtonDirective extends ButtonDirective {
+  constructor(element: ElementRef) {
+    super(element);
+    this.class = ButtonType.Hollow;
+  }
 }

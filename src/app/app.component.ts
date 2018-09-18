@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { StorageService } from '@nikx/orm';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +8,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+
+  constructor(@Inject(StorageService) public storage: any) {
+  }
+
   options: any = {
     chart: {
       type: 'bar'
@@ -31,6 +36,9 @@ export class AppComponent {
     }]
   };
 
+  onChange(e) {
+    this.storage.price = e.target.value;
+  }
   add() {
     // this.options.series.push({
     //   name: 'Nikx', data: [
@@ -40,7 +48,7 @@ export class AppComponent {
     // );
     this.options = {
       chart: {
-        type: 'column'
+        type: 'line'
       },
       title: {
         text: 'New Title'
