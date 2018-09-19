@@ -20,7 +20,6 @@
     "@angular/platform-browser": "^6.0.3",
     "@angular/platform-browser-dynamic": "^6.0.3",
     "@angular/router": "^6.0.3",
-    "@nikx/orm": "0.0.1",
     "@nikx/uma": "0.0.1",
     "core-js": "^2.5.4",
     "highcharts": "^6.1.3",

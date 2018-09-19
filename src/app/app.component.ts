@@ -1,5 +1,4 @@
 import { Component, Inject } from '@angular/core';
-import { StorageService } from '@nikx/orm';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +8,7 @@ import { StorageService } from '@nikx/orm';
 export class AppComponent {
   title = 'app';
 
-  constructor(@Inject(StorageService) public storage: any) {
+  constructor() {
   }
 
   options: any = {
@@ -36,9 +35,6 @@ export class AppComponent {
     }]
   };
 
-  onChange(e) {
-    this.storage.price = e.target.value;
-  }
   add() {
     // this.options.series.push({
     //   name: 'Nikx', data: [
