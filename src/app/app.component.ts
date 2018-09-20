@@ -34,6 +34,7 @@ export class AppComponent {
       data: [5, 7, 3]
     }]
   };
+  test: any = true;
 
   add() {
     // this.options.series.push({

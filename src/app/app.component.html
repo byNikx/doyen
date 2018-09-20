@@ -1,10 +1,122 @@
-<section style="width:500px; margin: 3rem auto;">
+<section style="width:700px; margin: 3rem auto;">
   <bd-graph [options]="options">
     <!-- <bd-graph-title>Fruit Consumption</bd-graph-title> -->
     <bd-graph-footer>
-      <button bd-hollow-button color="success" size="expanded small" (click)="add()">Switch</button>
-      <a disabled href="#" bd-button>Link</a>
+      <bd-button-group size="small" style="margin-bottom: 0;">
+        <button bd-button (click)="add()">Switch</button>
+        <a href="#" bd-button>Print</a>
+      </bd-button-group>
     </bd-graph-footer>
   </bd-graph>
+</section>
+<section style="width:700px; margin: 3rem auto;">
+  <h1>Basic Buttons</h1>
+  <a bd-button href="about.html">Link</a>
+  <button bd-button>Button</button>
+
+  <h1>Button Sizing</h1>
+  <a bd-button size="tiny" href="#">So Tiny</a>
+  <a bd-button size="small" href="#">So Small</a>
+  <a bd-button href="#">So Basic</a>
+  <a bd-button size="large" href="#">So Large</a>
+  <a bd-button size="expanded" href="#">Such Expand</a>
+  <a bd-button size="small expanded" href="#">Wow, Small Expand</a>
+
+  <h1>Responsive Expanded Buttons</h1>
+  <a bd-button size="small small-only-expanded" href="#">Wow, Expand only on small viewport</a>
+  <a bd-button size="small medium-only-expanded" href="#">Expand only on medium viewport</a>
+  <a bd-button size="small large-only-expanded" href="#">Expand only on large viewport</a>
+
+  <a bd-button size="small medium-expanded" href="#">Wow, Expand on medium and larger</a>
+  <a bd-button size="small large-expanded" href="#">Expand on large and larger</a>
+
+  <a bd-button size="small medium-down-expanded" href="#">Expand on medium and smaller</a>
+  <a bd-button size="small large-down-expanded" href="#">Expand on large and smaller</a>
+
+  <h1>Button Coloring</h1>
+  <a bd-button color="primary" href="#">Primary</a>
+  <a bd-button color="secondary" href="#">Secondary</a>
+  <a bd-button color="success" href="#">Success</a>
+  <a bd-button color="alert" href="#">Alert</a>
+  <a bd-button color="warning" href="#">Warning</a>
+
+  <h1>Hollow Button Style</h1>
+  <button bd-hollow-button href="#">Primary</button>
+  <button bd-hollow-button color="secondary" class="hollow button secondary" href="#">Secondary</button>
+  <button bd-hollow-button color="success" class="hollow button success" href="#">Success</button>
+  <button bd-hollow-button color="alert" href="#">Alert</button>
+  <button bd-hollow-button color="warning" href="#">Warning</button>
+  <button bd-hollow-button href="#" disabled>Disabled</button>
+
+  <h1>Disabled Buttons</h1>
+  <a bd-button color="primary" href="#" disabled>Link Disabled</a>
+  <button bd-button color="primary" disabled>Primary</button>
+  <button bd-button color="secondary" disabled>Secondary</button>
+  <button bd-button color="success" disabled>Success</button>
+  <button bd-button color="alert" disabled>Alert</button>
+  <button bd-button color="warning" disabled>Warning</button>
+
+  <h1>Disabled Hollow Buttons</h1>
+  <a bd-hollow-button color="primary" href="#" disabled>Link Disabled</a>
+  <button bd-hollow-button color="primary" disabled>Primary</button>
+  <button bd-hollow-button color="secondary" disabled>Secondary</button>
+  <button bd-hollow-button color="success" disabled>Success</button>
+  <button bd-hollow-button color="alert" disabled>Alert</button>
+  <button bd-hollow-button color="warning" disabled>Warning</button>
+
+  <h1>Clear Styling Button</h1>
+  <a bd-clear-button color="primary" href="#">Primary</a>
+  <a bd-clear-button color="secondary" href="#">Secondary</a>
+  <a bd-clear-button color="success" href="#">Success</a>
+  <a bd-clear-button color="alert" href="#">Alert</a>
+  <a bd-clear-button color="warning" href="#">Warning</a>
+  <a bd-clear-button color="primary" href="#" disabled>Primary</a>
+
+  <h1>Button Group</h1>
+  <bd-button-group>
+    <a bd-button>One</a>
+    <a bd-button>Two</a>
+    <a bd-button>Three</a>
+  </bd-button-group>
+
+  <h2>Button Group Sizing</h2>
+  <bd-button-group size="small">
+    <a bd-button>One</a>
+    <a bd-button>Two</a>
+    <a bd-button>Three</a>
+  </bd-button-group>
+
+  <h1>Button Group Coloring</h1>
+  <bd-button-group>
+    <a bd-button color="secondary">One</a>
+    <a bd-button color="success">Two</a>
+    <a bd-button color="warning">Three</a>
+    <a bd-button color="alert">Four</a>
+    <a bd-button color="primary" disabled>Five</a>
+  </bd-button-group>
+  <bd-button-group color="secondary">
+    <a bd-button>One</a>
+    <a bd-button>Two</a>
+    <a bd-button>Three</a>
+    <a bd-button>Four</a>
+    <a bd-button>Five</a>
+  </bd-button-group>
+  <bd-button-group size="expanded">
+    <a bd-button>One</a>
+    <a bd-button>Two</a>
+    <a bd-button>Three</a>
+  </bd-button-group>
+
+  <h1>Button Group Stacking</h1>
+  <bd-button-group stack="stacked-for-small">
+    <a bd-button>One</a>
+    <a bd-button>Two</a>
+    <a bd-button>Three</a>
+    <a bd-button>Four</a>
+    <a bd-button>Five</a>
+  </bd-button-group>
+
+  <h1>Switch Basic</h1>
+  <bd-switch disabled="false" [(ngModel)]="test"></bd-switch> {{test}}
 </section>
 <!-- <section bd-graph></section> -->

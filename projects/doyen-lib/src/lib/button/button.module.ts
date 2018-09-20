@@ -1,6 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ButtonDirective, HollowButtonDirective } from './button.directive';
+import {
+  ButtonDirective,
+  HollowButtonDirective,
+  ClearButtonDirective,
+  IconButtonDirective
+} from './button.directive';
+import { ButtonGroupComponent } from './button-group/button-group.component';
 
 @NgModule({
   imports: [
@@ -9,10 +15,16 @@ import { ButtonDirective, HollowButtonDirective } from './button.directive';
   declarations: [
     ButtonDirective,
     HollowButtonDirective,
+    ClearButtonDirective,
+    IconButtonDirective,
+    ButtonGroupComponent
   ],
   exports: [
     ButtonDirective,
-    HollowButtonDirective
+    HollowButtonDirective,
+    ClearButtonDirective,
+    IconButtonDirective,
+    ButtonGroupComponent
   ]
 })
 export class ButtonModule { }

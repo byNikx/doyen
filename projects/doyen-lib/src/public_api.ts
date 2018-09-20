@@ -21,3 +21,9 @@ export * from './lib/graph/graph.module';
  */
 export * from './lib/button/button.directive';
 export * from './lib/button/button.module';
+
+/**
+ * Switch Module
+ */
+export * from './lib/switch/switch.component';
+export * from './lib/switch/switch.module'; 

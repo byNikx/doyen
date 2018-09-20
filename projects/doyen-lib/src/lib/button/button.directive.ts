@@ -1,42 +1,33 @@
-import { Directive, ElementRef, Input, HostBinding, HostListener } from '@angular/core';
-
-export enum ButtonColor {
-  Primary = 'primary',
-  Secondary = 'secondary',
-  Success = 'success',
-  Alert = 'alert',
-  Warning = 'warning'
-}
-export enum ButtonType {
-  Hollow = 'hollow'
-}
-export enum ButtonSize {
-  Tiny = 'tiny',
-  Small = 'small',
-  Large = 'large',
-  Expanded = 'expanded'
-}
+import {
+  Directive,
+  ElementRef,
+  Input,
+  HostBinding
+} from '@angular/core';
+import { ButtonType, ButtonSize, JsTypes } from './button.constants';
 
 @Directive({
-  selector: '[bdButton], [bd-button]'
+  selector: 'a[bdButton], a[bd-button], button[bdButton], button[bd-button]'
 })
 export class ButtonDirective {
 
+  /**
+   * Defining color attribute for the button
+   */
   @Input('color') set color(type: ButtonType) {
     this.class = type;
   }
 
+  /**
+   * Defining size attribute for the button
+   */
   @Input('size') set buttonSize(size: ButtonSize) {
     this.class = size;
   }
 
-  @Input('hollow') set hollow(isHollow: string) {
-    this.class = ButtonType.Hollow;
-    if (isHollow === 'false') {
-      this._class.splice(this._class.indexOf(ButtonType.Hollow), 1);
-    }
-  }
-
+  /**
+   * Button classes manipulation which are defined in foundation framework
+   */
   private _class: string[] = ['button'];
   set class(name: string) {
     this._class.push(name);
@@ -49,28 +40,52 @@ export class ButtonDirective {
     protected element: ElementRef
   ) { }
 
+  /**
+   * Setting `class` property of the button
+   */
   @HostBinding('class') get elementClass() {
     return this.class;
   }
 
-  @HostListener('click') handleDisable($e) {
-    // const disabled = this.element.nativeElement.getAttribute('disabled');
-    // if (disabled) {
-    //   console.log('disabled');
-    // } else {
-    //   console.log('disabled1');
-    // }
+  /**
+   * Reset the button directive classes to make extensible
+   * Note: Use it with care.
+   */
+  _resetClass(callback: Function): void {
+    this._class = [];
+    if (typeof callback === JsTypes.Function) {
+      callback();
+    }
   }
-
 
 }
 
 @Directive({
-  selector: '[bdHollowButton], [bd-hollow-button]'
+  selector: 'a[bdHollowButton], a[bd-hollow-button], button[bdHollowButton], button[bd-hollow-button]'
 })
 export class HollowButtonDirective extends ButtonDirective {
   constructor(element: ElementRef) {
     super(element);
     this.class = ButtonType.Hollow;
+  }
+}
+
+@Directive({
+  selector: 'a[bdClearButton], a[bd-clear-button], button[bdClearButton], button[bd-clear-button]'
+})
+export class ClearButtonDirective extends ButtonDirective {
+  constructor(element: ElementRef) {
+    super(element);
+    this.class = ButtonType.Clear;
+  }
+}
+
+@Directive({
+  selector: 'a[bdIconButton], a[bd-icon-button], button[bdIconButton], button[bd-icon-button]'
+})
+export class IconButtonDirective extends ButtonDirective {
+  constructor(element: ElementRef) {
+    super(element);
+    this.class = ButtonType.Icon;
   }
 }
