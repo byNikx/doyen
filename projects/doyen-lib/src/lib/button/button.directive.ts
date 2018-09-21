@@ -51,7 +51,7 @@ export class ButtonDirective {
    * Reset the button directive classes to make extensible
    * Note: Use it with care.
    */
-  _resetClass(callback: Function): void {
+  resetClass(callback: Function): void {
     this._class = [];
     if (typeof callback === JsTypes.Function) {
       callback();

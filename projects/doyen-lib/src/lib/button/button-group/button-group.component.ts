@@ -30,7 +30,7 @@ export class ButtonGroupComponent extends ButtonDirective {
     element: ElementRef
   ) {
     super(element);
-    super._resetClass(() => {
+    super.resetClass(() => {
       this.class = ButtonType.ButtonGroup;
     });
   }

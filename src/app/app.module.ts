@@ -2,7 +2,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { GraphModule, DividerModule, ButtonModule, SwitchModule } from 'projects/doyen-lib/src/public_api';
+import {
+  GraphModule,
+  DividerModule,
+  ButtonModule,
+  SwitchModule,
+  InputModule
+} from 'projects/doyen-lib/src/public_api';
 import { FormsModule } from '@angular/forms';
 
 
@@ -16,7 +22,8 @@ import { FormsModule } from '@angular/forms';
     GraphModule,
     DividerModule,
     ButtonModule,
-    SwitchModule
+    SwitchModule,
+    InputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

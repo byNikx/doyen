@@ -5,25 +5,24 @@
 /**
  * Divider Module
  */
-export * from './lib/divider/divider.component';
-export * from './lib/divider/divider.module';
+export * from './lib/divider';
 
 /**
  * Graph Module
  */
-export * from './lib/graph/graph.component';
-export * from './lib/graph/graph-title/graph-title.component';
-export * from './lib/graph/graph-footer/graph-footer.component';
-export * from './lib/graph/graph.module';
+export * from './lib/graph';
 
 /**
  * Button Module
  */
-export * from './lib/button/button.directive';
-export * from './lib/button/button.module';
+export * from './lib/button';
 
 /**
  * Switch Module
  */
-export * from './lib/switch/switch.component';
-export * from './lib/switch/switch.module'; 
+export * from './lib/switch';
+
+/**
+ * Input Module
+ */
+export * from './lib/input';
