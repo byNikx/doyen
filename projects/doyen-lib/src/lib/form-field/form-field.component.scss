@@ -23,6 +23,8 @@
             transition: .14s ease-out;
             cursor: text;
             margin-top: 10px;
+            color: $secondary-text-color;
+            transition: .2s cubic-bezier(.25,.8,.25,1);
 
             &.required{
                 &::after{

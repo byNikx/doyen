@@ -1,5 +1,14 @@
-import { Component, OnInit, ViewChild, ElementRef, Renderer2, HostBinding, HostListener } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  Renderer2,
+  HostListener,
+  OnDestroy
+} from '@angular/core';
 import { LabelDirective } from './label.directive';
+import { Subscription } from 'rxjs';
 
 const subscriptions: any[] = [];
 HTMLElement.prototype['hasClass'] = function (c) {
@@ -11,7 +20,7 @@ HTMLElement.prototype['hasClass'] = function (c) {
   templateUrl: './form-field.component.html',
   styleUrls: ['./form-field.component.scss']
 })
-export class FormFieldComponent implements OnInit {
+export class FormFieldComponent implements OnInit, OnDestroy {
 
   private _label: LabelDirective;
   @ViewChild(LabelDirective) set label(element: LabelDirective) {
@@ -43,7 +52,9 @@ export class FormFieldComponent implements OnInit {
   }
 
   @HostListener('focusout') public handleBlur() {
-    this.handleClass(this.inputContainer, 'active', true);
+    if (this.input.value.length <= 0) {
+      this.handleClass(this.inputContainer, 'active', true);
+    }
   }
 
 
@@ -53,14 +64,20 @@ export class FormFieldComponent implements OnInit {
   ) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     const labelOnClick = this.label.onClicked.subscribe(e => {
       this.handleFocus();
     });
     subscriptions.concat([labelOnClick]);
   }
 
-  handleClass(element: HTMLElement, className: string, removeClass?: boolean) {
+  ngOnDestroy(): void {
+    subscriptions.forEach((subscription: Subscription) => {
+      subscription.unsubscribe();
+    });
+  }
+
+  handleClass(element: HTMLElement, className: string, removeClass?: boolean): void {
     if (!removeClass && !element.hasClass(className)) {
       this.renderer.addClass(this.inputContainer, className);
     } else if (removeClass) {
