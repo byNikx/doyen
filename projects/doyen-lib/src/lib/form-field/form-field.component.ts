@@ -5,10 +5,17 @@ import {
   ElementRef,
   Renderer2,
   HostListener,
-  OnDestroy
+  OnDestroy,
+  ViewEncapsulation,
+  ContentChild
 } from '@angular/core';
 import { LabelDirective } from './label.directive';
 import { Subscription } from 'rxjs';
+import { InputDirective } from '../input/input.directive';
+
+interface HTMLElement {
+  hasClass(c: string): boolean;
+}
 
 const subscriptions: any[] = [];
 HTMLElement.prototype['hasClass'] = function (c) {
@@ -18,7 +25,7 @@ HTMLElement.prototype['hasClass'] = function (c) {
 @Component({
   selector: 'bd-form-field',
   templateUrl: './form-field.component.html',
-  styleUrls: ['./form-field.component.scss']
+  styleUrls: ['./form-field.component.scss'],
 })
 export class FormFieldComponent implements OnInit, OnDestroy {
 
@@ -39,7 +46,7 @@ export class FormFieldComponent implements OnInit, OnDestroy {
   }
 
   private _input: ElementRef;
-  @ViewChild('input') set input(element) {
+  @ContentChild(InputDirective, { read: ElementRef }) set input(element) {
     this._input = element;
   }
   get input() {
