@@ -9,12 +9,17 @@ import {
   ViewEncapsulation,
   ContentChild
 } from '@angular/core';
-import { LabelDirective } from './label.directive';
 import { Subscription } from 'rxjs';
 import { InputDirective } from '../input/input.directive';
+import { LabelComponent } from './label/label.component';
 
 interface HTMLElement {
   hasClass(c: string): boolean;
+}
+
+declare enum HTMLInputElementState {
+  Error = 'error',
+  Warning = 'warning',
 }
 
 const subscriptions: any[] = [];
@@ -29,8 +34,8 @@ HTMLElement.prototype['hasClass'] = function (c) {
 })
 export class FormFieldComponent implements OnInit, OnDestroy {
 
-  private _label: LabelDirective;
-  @ViewChild(LabelDirective) set label(element: LabelDirective) {
+  private _label: LabelComponent;
+  @ContentChild(LabelComponent) set label(element: LabelComponent) {
     this._label = element;
   }
   get label() {
@@ -53,15 +58,19 @@ export class FormFieldComponent implements OnInit, OnDestroy {
     return this._input.nativeElement;
   }
 
-  @HostListener('focusin') public handleFocus() {
-    this.handleClass(this.inputContainer, 'active');
-    this.input.focus();
+  @HostListener('focusin', ['$event.target']) public handleFocus(input): void {
+    this._handleClass(this.inputContainer, 'active');
+    input.focus();
   }
 
-  @HostListener('focusout') public handleBlur() {
-    if (this.input.value.length <= 0) {
-      this.handleClass(this.inputContainer, 'active', true);
+  @HostListener('focusout', ['$event.target']) public handleBlur(input): void {
+    if (input.value.length <= 0) {
+      this._handleClass(this.inputContainer, 'active', true);
     }
+  }
+
+  @HostListener('input', ['$event.target']) handleInput(input): void {
+    this._validate(input);
   }
 
 
@@ -73,9 +82,10 @@ export class FormFieldComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const labelOnClick = this.label.onClicked.subscribe(e => {
-      this.handleFocus();
+      this.handleFocus(this.input);
     });
-    subscriptions.concat([labelOnClick]);
+    subscriptions.push(labelOnClick);
+
   }
 
   ngOnDestroy(): void {
@@ -84,12 +94,28 @@ export class FormFieldComponent implements OnInit, OnDestroy {
     });
   }
 
-  handleClass(element: HTMLElement, className: string, removeClass?: boolean): void {
+  private _handleClass(element: HTMLElement, className: string, removeClass?: boolean): void {
     if (!removeClass && !element.hasClass(className)) {
       this.renderer.addClass(this.inputContainer, className);
     } else if (removeClass) {
       this.renderer.removeClass(this.inputContainer, className);
     }
+  }
+
+  private _validate(element: HTMLInputElement): void {
+    if (!element) {
+      throw new ReferenceError(`Invalid element ${element}`);
+    }
+    if (element.required) {
+      this._handleClass(this.inputContainer, HTMLInputElementState.Error, element.checkValidity());
+    }
+  }
+
+  private _updateState(state: HTMLInputElementState): void {
+  }
+
+  private _getErrorMessage(element: HTMLInputElement): string {
+    return element.validationMessage;
   }
 
 }

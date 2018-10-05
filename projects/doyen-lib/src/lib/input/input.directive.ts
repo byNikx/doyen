@@ -1,10 +1,21 @@
-import { Directive } from '@angular/core';
+import { Directive, ElementRef } from '@angular/core';
 
 @Directive({
-  selector: '[bdInput]'
+  selector: '[bdInput], [bd-input]'
 })
 export class InputDirective {
 
-  constructor() { }
+  private _input: HTMLInputElement;
+  set input(input: HTMLInputElement) {
+    this._input = input;
+  }
+  get input(): HTMLInputElement {
+    return this._input;
+  }
+  constructor(
+    element: ElementRef
+  ) {
+    this.input = element.nativeElement;
+  }
 
 }

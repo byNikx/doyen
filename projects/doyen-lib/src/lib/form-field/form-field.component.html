@@ -1,7 +1,11 @@
 <section class="bd-form-field-wrapper error" #inputContainer>
   <section class="input-wrapper grid-x align-middle">
+    <ng-container bd-label-container>
+      <ng-content select="bd-label"></ng-content>
+      <!-- <bd-label>kljhkljklj</bd-label> -->
+    </ng-container>
     <ng-content></ng-content>
-    <label bd-label class="required">Name</label>
+    <!-- <label bd-label class="required">Name</label> -->
   </section>
   <section class="info-wrapper">
     <span class="text error-message">

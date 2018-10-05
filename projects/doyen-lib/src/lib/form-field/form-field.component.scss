@@ -16,13 +16,13 @@
             }
         }
         
-        label{
+        bd-label{
             font-size: 16px;
             font-weight: 500;
             position: absolute;
             // transition: .3s ease-out;
             cursor: text;
-            margin-top: 10px;
+            margin-top: 7px;
             color: $secondary-text-color;
             transition: .4s cubic-bezier(.25,.8,.25,1);
 
@@ -65,7 +65,8 @@
         
         /** Input states */
         &.active{
-            label{
+            bd-label{
+                margin-top: 10px;
                 transform: translateY(-1.28125em) scale(.75) perspective(100px);
                 transform: .4s cubic-bezier(.25,.8,.25,1),color .4s cubic-bezier(.25,.8,.25,1),width .4s cubic-bezier(.25,.8,.25,1);
                 transform-origin: left top;
@@ -73,7 +74,7 @@
         }
 
         &.error{
-            label{
+            bd-label{
                 color: red !important;
             }
             .info-wrapper{

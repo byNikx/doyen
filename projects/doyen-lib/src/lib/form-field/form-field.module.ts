@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormFieldComponent } from './form-field.component';
-import { LabelDirective } from './label.directive';
+import { LabelComponent, LabelContainerDirective } from './label/label.component';
 
 @NgModule({
   imports: [
@@ -9,10 +9,12 @@ import { LabelDirective } from './label.directive';
   ],
   declarations: [
     FormFieldComponent,
-    LabelDirective
+    LabelContainerDirective,
+    LabelComponent
   ],
   exports: [
-    FormFieldComponent
+    FormFieldComponent,
+    LabelComponent
   ]
 })
 export class FormFieldModule { }
