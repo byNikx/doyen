@@ -1,4 +1,4 @@
-<section class="bd-form-field-wrapper error" #inputContainer>
+<section class="bd-form-field-wrapper" #inputContainer>
   <section class="input-wrapper grid-x align-middle">
     <ng-container bd-label-container>
       <ng-content select="bd-label"></ng-content>
@@ -8,6 +8,12 @@
     <!-- <label bd-label class="required">Name</label> -->
   </section>
   <section class="info-wrapper">
+    <ng-container bd-error-container>
+      <ng-content select="bd-error"></ng-content>
+    </ng-container>
+    <ng-container bd-hint-container>
+      <ng-content select="bd-hint"></ng-content>
+    </ng-container>
     <span class="text error-message">
       Don't disclose <b>personal</b> info.
     </span>

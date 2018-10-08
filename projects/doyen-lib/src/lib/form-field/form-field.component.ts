@@ -12,12 +12,15 @@ import {
 import { Subscription } from 'rxjs';
 import { InputDirective } from '../input/input.directive';
 import { LabelComponent } from './label/label.component';
+import { ValidationErrors } from '@angular/forms';
+import { EnumValues, EnumKeys } from '../../_util';
 
 interface HTMLElement {
   hasClass(c: string): boolean;
 }
 
-declare enum HTMLInputElementState {
+export enum HTMLInputElementState {
+  Valid = 'valid',
   Error = 'error',
   Warning = 'warning',
 }
@@ -70,7 +73,10 @@ export class FormFieldComponent implements OnInit, OnDestroy {
   }
 
   @HostListener('input', ['$event.target']) handleInput(input): void {
-    this._validate(input);
+    const validationStatus = this._validate(input);
+    this._setState(validationStatus.state);
+    this._setMessage(validationStatus.message);
+    console.log(input.willValidate);
   }
 
 
@@ -102,16 +108,34 @@ export class FormFieldComponent implements OnInit, OnDestroy {
     }
   }
 
-  private _validate(element: HTMLInputElement): void {
+  private _validate(element: HTMLInputElement): ValidationErrors | null {
     if (!element) {
       throw new ReferenceError(`Invalid element ${element}`);
     }
-    if (element.required) {
-      this._handleClass(this.inputContainer, HTMLInputElementState.Error, element.checkValidity());
+    if (!element.validity.valid) {
+      return {
+        message: element.validationMessage,
+        state: HTMLInputElementState.Error
+      };
     }
+    return {
+      message: null,
+      state: HTMLInputElementState.Valid
+    };
   }
 
-  private _updateState(state: HTMLInputElementState): void {
+  private _setState(state: string): void {
+    const allStates = Object.values(HTMLInputElementState);
+    allStates.forEach((defaultState: string) => {
+
+      this._handleClass(this.inputContainer, defaultState, true);
+    });
+    this._handleClass(this.inputContainer, state);
+  }
+
+  private _setMessage(message: string): void {
+    console.log('Setting message!', message);
+
   }
 
   private _getErrorMessage(element: HTMLInputElement): string {
