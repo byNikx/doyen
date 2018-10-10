@@ -77,7 +77,7 @@ export class GraphComponent implements OnInit, AfterContentInit {
      * and bd-graph-title component is present in the graph.
      */
     if (!this.graphTitle && this.graphTitleContainer && options.title) {
-      this.loadGraphTitle(options.title.text);
+      this._loadGraphTitle(options.title.text);
     }
 
     /**
@@ -132,7 +132,7 @@ export class GraphComponent implements OnInit, AfterContentInit {
      * Load the bd-graph-title component if it's not available.
      */
     if (!this.graphTitle) {
-      this.loadGraphTitle(this.options.title.text);
+      this._loadGraphTitle(this.options.title.text);
     }
   }
 
@@ -141,7 +141,7 @@ export class GraphComponent implements OnInit, AfterContentInit {
    * @param component
    * @returns ComponentFactory<T>
    */
-  getComponentFactory<T>(component: Type<T>): ComponentFactory<T> {
+  private _getComponentFactory<T>(component: Type<T>): ComponentFactory<T> {
     return this.componentFactoryResolver.resolveComponentFactory(component);
   }
 
@@ -149,16 +149,16 @@ export class GraphComponent implements OnInit, AfterContentInit {
    * Load the bd-graph-title component and sets title text.
    * @param title
    */
-  loadGraphTitle(title: any): void {
+  private _loadGraphTitle(title: any): void {
     const viewContainerRef = this.graphTitleContainer.viewContainerRef;
-    const graphTitleComponentFactory = this.getComponentFactory(GraphTitleComponent);
+    const graphTitleComponentFactory = this._getComponentFactory(GraphTitleComponent);
     viewContainerRef.clear();
     viewContainerRef.createComponent(graphTitleComponentFactory, 0, null, [
       [this.renderer.createText(title)]
     ]);
   }
 
-  loadGraphFooter(): void {
+  private _loadGraphFooter(): void {
     throw new Error('Method implementation not available.');
   }
 

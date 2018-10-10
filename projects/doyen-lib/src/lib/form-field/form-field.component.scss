@@ -1,11 +1,13 @@
 @import '../../../_theme';
 
 
-:host{display: inline-block;}
+:host{
+    display: inline-block;
+}
 ::ng-deep{
 
     .bd-form-field-wrapper{
-        height: 68px;
+        height: 72px;
         min-width: 280px;
         position: relative;
 
@@ -47,7 +49,7 @@
             display: block;
             margin-top:15px;
             width: 100%;
-            border-bottom: 1px solid rgba(0,0,0,.2);
+            border-bottom: 1px solid $border-color;
 
             &:focus{
                 border-bottom-width: 2px;
@@ -58,8 +60,12 @@
             font-size: 75%;
             font-weight: 500;
             line-height: 16px;
-            margin-top: 5px;
+            margin-top: 2px;
             color: $secondary-text-color;
+
+            bd-error, bd-hint{
+                    
+            }
             
         }
         
@@ -78,6 +84,7 @@
                 color: red !important;
             }
             .info-wrapper{
+                
                 
                 .error-message{
                     color: red !important;

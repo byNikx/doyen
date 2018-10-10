@@ -1,4 +1,13 @@
-function EnumKeys(enumObject): any[] {
+
+interface HTMLElement {
+    hasClass(c: string): boolean;
+}
+
+HTMLElement.prototype['hasClass'] = function (c) {
+    return this.className.split(' ').indexOf(c) > -1;
+};
+
+function enumKeys(enumObject): any[] {
     const keys = Object.keys(enumObject);
     // if (keys.length) {
     //     return keys;
@@ -6,7 +15,7 @@ function EnumKeys(enumObject): any[] {
     console.log(keys);
     return keys.filter(k => !isNaN(enumObject[k as any]));
 }
-function EnumValues(enumObject): any[] {
+function enumValues(enumObject): any[] {
     const values = Object.values(enumObject);
     // if (values.length) {
     //     return values;
@@ -15,7 +24,15 @@ function EnumValues(enumObject): any[] {
         .filter(k => isNaN(enumObject[k as any]));
 }
 
+function addClass(element: any, className: string): void {
+    element.classList.add(className);
+}
+
+function removeClass(element: any, className: string): void {
+    element.classList.remove(className);
+}
+
 export {
-    EnumKeys,
-    EnumValues
+    addClass,
+    removeClass
 };

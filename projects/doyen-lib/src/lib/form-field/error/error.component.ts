@@ -1,4 +1,5 @@
-import { Component, OnInit, Directive, ElementRef } from '@angular/core';
+import { Component, OnInit, Directive, ElementRef, ViewContainerRef, Renderer2 } from '@angular/core';
+import { addClass, removeClass } from '../../../_util';
 
 @Component({
   selector: 'bd-error',
@@ -7,9 +8,30 @@ import { Component, OnInit, Directive, ElementRef } from '@angular/core';
 })
 export class ErrorComponent implements OnInit {
 
-  constructor() { }
+  private _element: ElementRef;
+  set element(element: ElementRef) {
+    this._element = element;
+  }
+  get element(): ElementRef {
+    return this._element;
+  }
 
-  ngOnInit() {
+  constructor(
+    private viewContainerRef: ViewContainerRef,
+    private rnderer: Renderer2
+  ) {
+    this.element = this.viewContainerRef.element;
+  }
+
+  ngOnInit(): void {
+  }
+
+  public show(): void {
+    removeClass(this.element.nativeElement, 'hidden');
+  }
+
+  public hide(): void {
+    addClass(this.element.nativeElement, 'hidden');
   }
 
 }

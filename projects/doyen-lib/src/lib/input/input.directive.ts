@@ -12,6 +12,7 @@ export class InputDirective {
   get input(): HTMLInputElement {
     return this._input;
   }
+
   constructor(
     element: ElementRef
   ) {
