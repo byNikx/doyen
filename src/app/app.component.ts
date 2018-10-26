@@ -13,7 +13,7 @@ export class AppComponent {
 
   options: any = {
     chart: {
-      type: 'bar'
+      type: 'line'
     },
     title: {
       text: 'Fruit Consumption'
@@ -45,7 +45,7 @@ export class AppComponent {
     // );
     this.options = {
       chart: {
-        type: 'line'
+        type: 'column'
       },
       title: {
         text: 'New Title'
