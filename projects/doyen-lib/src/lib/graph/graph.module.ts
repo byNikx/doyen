@@ -5,6 +5,7 @@ import { GraphContainerDirective } from './graph-container.directive';
 import { GraphTitleComponent } from './graph-title/graph-title.component';
 import { GraphFooterComponent } from './graph-footer/graph-footer.component';
 import { DividerModule } from '../divider/divider.module';
+import { GraphToolbarComponent } from './graph-toolbar/graph-toolbar.component';
 
 @NgModule({
   imports: [
@@ -16,12 +17,14 @@ import { DividerModule } from '../divider/divider.module';
     GraphContainerDirective,
     GraphTitleComponent,
     GraphFooterComponent,
-    GraphTitleContainerDirective
+    GraphTitleContainerDirective,
+    GraphToolbarComponent
   ],
   exports: [
     GraphComponent,
     GraphTitleComponent,
-    GraphFooterComponent
+    GraphFooterComponent,
+    GraphToolbarComponent
   ],
   entryComponents: [
     GraphTitleComponent

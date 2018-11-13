@@ -4,9 +4,6 @@ import {
   ElementRef,
   ViewChild,
   Input,
-  OnChanges,
-  SimpleChanges,
-  DoCheck,
   ContentChild,
   AfterContentInit,
   Directive,
@@ -131,7 +128,7 @@ export class GraphComponent implements OnInit, AfterContentInit {
     /**
      * Load the bd-graph-title component if it's not available.
      */
-    if (!this.graphTitle) {
+    if (!this.graphTitle && this.options.title) {
       this._loadGraphTitle(this.options.title.text);
     }
   }

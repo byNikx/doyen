@@ -1,9 +1,12 @@
-<article class="with-border">
+<article class="with1-border">
   <header class="graph-title test">
     <ng-container bdGraphTitleContainer>
       <ng-content select="bd-graph-title, [bd-graph-title]"></ng-content>
     </ng-container>
   </header>
+  <nav class="graph-toolbar">
+    <ng-content select="bd-graph-toolbar, [bd-graph-toolbar]"></ng-content>
+  </nav>
   <section bdGraphContainer class="graph-container"></section>
   <footer class="graph-footer">
     <ng-content select="bd-graph-footer, [bd-graph-footer]"></ng-content>

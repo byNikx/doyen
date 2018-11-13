@@ -4,4 +4,23 @@
     .with-border{
         border: 1px solid $border-color;
     }
+    background-color: red;
+
+
+    .graph-title{
+        border: 1px solid cyan;
+    }
+
+    .graph-toolbar{
+        border: 1px solid teal;
+    }
+
+    .graph-container{
+        border: 1px solid red;
+    }
+
+    .graph-footer{
+        border: 1px solid green;
+    }
+
 }
