@@ -7,9 +7,25 @@
   </bd-form-field>
 
   <h1>Graph</h1>
-  <bd-graph [options]="options">
-    <bd-graph-title>Graph Title</bd-graph-title>
-    <bd-graph-toolbar>jkh</bd-graph-toolbar>
+  <bd-divider></bd-divider>
+  <bd-graph type="chart" [options]="options">
+    <!-- <bd-graph-title>Graph Title</bd-graph-title> -->
+    <!-- <bd-graph-toolbar>
+      <button bd-button>Tool</button>
+    </bd-graph-toolbar> -->
+    <bd-graph-footer>
+      <bd-button-group size="small" style="margin-bottom: 0;">
+        <button bd-button (click)="add()">Switch</button>
+        <a href="#" bd-button>Print</a>
+      </bd-button-group>
+    </bd-graph-footer>
+  </bd-graph>
+
+  <bd-graph type="stock" [options]="stockOptions">
+    <!-- <bd-graph-title>Graph Title</bd-graph-title> -->
+    <!-- <bd-graph-toolbar>
+      <button bd-button>Tool</button>
+    </bd-graph-toolbar> -->
     <bd-graph-footer>
       <bd-button-group size="small" style="margin-bottom: 0;">
         <button bd-button (click)="add()">Switch</button>

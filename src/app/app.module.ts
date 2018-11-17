@@ -9,7 +9,15 @@ import {
   SwitchModule,
   InputModule
 } from 'projects/doyen-lib/src/public_api';
+// import {
+//   GraphModule,
+//   DividerModule,
+//   ButtonModule,
+//   SwitchModule,
+//   InputModule
+// } from '@nikx/uma'; 
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule }    from '@angular/common/http';
 
 
 @NgModule({
@@ -17,6 +25,7 @@ import { FormsModule } from '@angular/forms';
     AppComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     FormsModule,
     GraphModule,

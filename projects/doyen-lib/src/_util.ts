@@ -1,4 +1,3 @@
-
 interface HTMLElement {
     hasClass(c: string): boolean;
 }

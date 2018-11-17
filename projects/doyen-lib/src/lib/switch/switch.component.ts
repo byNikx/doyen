@@ -38,7 +38,7 @@ export class SwitchComponent implements OnInit, ControlValueAccessor, Validator 
   private _onChange: (_: any) => void;
   private _onTouched: () => void;
 
-  @HostListener('change', ['$event.target']) private handleOnChange(input): void {
+  @HostListener('change', ['$event.target']) handleOnChange(input): void {
     this._onChange(input.value);
   }
 

@@ -17,8 +17,14 @@ import {
 
 import { GraphContainerDirective } from './graph-container.directive';
 import * as Highcharts from 'highcharts';
+import * as Highstock from 'highcharts/highstock';
 import { Options, ChartObject } from 'highcharts';
 import { GraphTitleComponent } from './graph-title/graph-title.component';
+
+export enum GraphType {
+    Chart = 'chart',
+    Stock = 'stock'
+}
 
 @Component({
   selector: 'bd-graph, [bd-graph]',
@@ -26,6 +32,19 @@ import { GraphTitleComponent } from './graph-title/graph-title.component';
   styleUrls: ['./graph.component.scss']
 })
 export class GraphComponent implements OnInit, AfterContentInit {
+
+  /**
+   * Graph type reference
+   */
+  private _graphType: GraphType;
+  @Input('type') set graphType(type: GraphType){
+    this._graphType = type;
+  }
+
+  get graphType(): GraphType{
+    return this._graphType;
+  }
+  
 
   /**
    * Graph title reference.
@@ -120,7 +139,7 @@ export class GraphComponent implements OnInit, AfterContentInit {
 
   ngOnInit(): void {
     const optionsWithoutTitle = Object.assign({}, this.options, { title: null });
-    this.chart = Highcharts.chart(this.graphContainer.viewContainerRef.element.nativeElement, optionsWithoutTitle);
+    this.chart = this._createGraph(optionsWithoutTitle, this.graphType);    
   }
 
   ngAfterContentInit(): void {
@@ -130,6 +149,17 @@ export class GraphComponent implements OnInit, AfterContentInit {
      */
     if (!this.graphTitle && this.options.title) {
       this._loadGraphTitle(this.options.title.text);
+    }
+  }
+
+  private _createGraph(options: any, type: GraphType): any{
+    if(type === GraphType.Chart){
+      return Highcharts.chart(this.graphContainer.viewContainerRef.element.nativeElement, options);
+    }
+    else if(type === GraphType.Stock){
+      return Highstock.stockChart(this.graphContainer.viewContainerRef.element.nativeElement, options);
+    }else{
+      return null;
     }
   }
 
